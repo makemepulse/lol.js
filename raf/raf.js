@@ -7,7 +7,7 @@
  *
  * use example
  *
- * import RAF from 'libs/raf'
+ * var RAF = require('./libs/raf)'
  *
  * RAF.subscribe( 'mySubscriberId', mySubscriberFn )
  * RAF.unsubscribe( 'mySubscriberId' )
