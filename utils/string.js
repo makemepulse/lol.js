@@ -4,22 +4,7 @@ function _TEMPLATE_REGEX( key ) {
   return new RegExp("\\$\\{"+key+"\\}", 'g')
 }
 
-/**
- * Insert character before/after a string
- *
- * @param {String} value
- * @param {Integer} max
- * @param {String} character
- * @param {Boolean} after
- * @returns {String}
- */
-function pad(value, max, character, after) {
-  if (value === undefined) return ''
-
-  var s = value.toString()
-
-  return s.length < max ? pad(!!after ? value+character : character+value, max, character, after) : s
-}
+var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g')
 
 /**
  * Interpolate string with the object
@@ -29,7 +14,7 @@ function pad(value, max, character, after) {
  * @returns {String}
  */
 function template( string, obj ) {
-
+  obj = obj || {}
   var value, str = string
 
   for (var key in obj) {
@@ -41,7 +26,80 @@ function template( string, obj ) {
 
 }
 
+
+/**
+ * Remove white spaces at the beginning and at the end of the string
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+function trimWhiteSpace(str) {
+  return str.replace(TRIM_SPACE_REGEX, '')
+}
+
+
+/**
+ * Slug string
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+function slug(str) {
+  return str.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
+
+
+/**
+ * Camel case
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+function camelCase(str) {
+  str = slug(str)
+
+  const words = str.split('-').map(function(word) {
+    return word.slice(0, 1).toUpperCase() + word.slice(1)
+  })
+
+  return words.join('')
+}
+
+/**
+ * Append or preprend a character to a string
+ *
+ * @export
+ * @param {String} str
+ * @param {Integer} limit
+ * @param {String} char
+ * @param {Boolean} [insertAfter]
+ * @returns {String}
+ */
+function pad(str, limit, char, insertAfter) {
+  var s = str.toString()
+
+  if (s.length < limit) {
+    if (insertAfter) s = char + s
+    else s = s + char
+
+    return pad(s, limit, char, insertAfter)
+  }
+
+  return s
+}
+
 module.exports = {
   pad: pad,
-  template: template
+  template: template,
+  trimWhiteSpace: trimWhiteSpace,
+  slug: slug,
+  camelCase: camelCase
 }
