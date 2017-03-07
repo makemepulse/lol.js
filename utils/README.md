@@ -18,6 +18,30 @@
 
 ## Validators
 
+### `isUndefined(value)`
+
+### `isNull(value)`
+
+### `isString(value)`
+
+### `isNumber(value)`
+
+### `isBoolean(value)`
+
+### `isset(value)`
+
+### `empty(value)`
+
+### `equal(value0, value1)`
+
+### `length(str, len)`
+
+### `email(str)`
+
+### `min(str, min)`
+
+### `max(str, max)`
+
 ## GUID
 
 ### `s4()`
