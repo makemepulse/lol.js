@@ -106,6 +106,8 @@
  // -> "hello-world"
 ```
 
+### `camelCase(str)`
+
 ```js
 /**
  * Camel case
