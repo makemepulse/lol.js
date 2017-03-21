@@ -40,50 +40,6 @@ function trimWhiteSpace(str) {
 
 
 /**
- * Slug string
- *
- * @export
- * @param {String} str
- * @returns {String}
- */
-function slug(str) {
-  return str.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
-}
-
-
-/**
- * Camel case
- *
- * @export
- * @param {String} str
- * @returns {String}
- */
-function camelCase(str) {
-  str = slug(str)
-
-  const words = str.split('-').map(function(word) {
-    return word.slice(0, 1).toUpperCase() + word.slice(1)
-  })
-
-  return words.join('')
-}
-
-/**
- * Slugify a string and replace tiret to underscore
- *
- * @param {String} str
- * @returns {String}
- */
-function underscore(str) {
-  return slug(str).replace(/-+/, '_')
-}
-
-/**
  * Append or preprend a character to a string
  *
  * @export
@@ -106,11 +62,59 @@ function pad(str, limit, char, insertAfter) {
   return s
 }
 
+
+
+/**
+ * Slug string
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+function toSlug(str) {
+  return str.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
+
+
+/**
+ * Camel case
+ *
+ * @export
+ * @param {String} str
+ * @returns {String}
+ */
+function toCamelCase(str) {
+  str = slug(str)
+
+  const words = str.split('-').map(function(word) {
+    return word.slice(0, 1).toUpperCase() + word.slice(1)
+  })
+
+  return words.join('')
+}
+
+
+/**
+ * Slugify a string and replace tiret to underscore
+ *
+ * @param {String} str
+ * @returns {String}
+ */
+function toUnderscore(str) {
+  return slug(str).replace(/-+/, '_')
+}
+
 module.exports = {
   pad: pad,
   template: template,
   trimWhiteSpace: trimWhiteSpace,
-  slug: slug,
-  camelCase: camelCase,
-  underscore: underscore
+
+  toSlug: toSlug,
+  toCamelCase: toCamelCase,
+  toUnderscore: toUnderscore
 }

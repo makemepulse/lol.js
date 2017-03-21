@@ -2,6 +2,13 @@
 
 const ArrayUtils = require('./array')
 
+/**
+ * Merge objects, concat array and keep unique value
+ *
+ * @param {Object} obj0
+ * @param {Object} obj1
+ * @returns
+ */
 function merge(obj0, obj1) {
 
   for (var key in obj1) {
