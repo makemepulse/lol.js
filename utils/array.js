@@ -105,9 +105,33 @@ function inverse(arr) {
   return tmp
 }
 
+
+/**
+ * Remove duplicates
+ *
+ * @param {Array} arr
+ *
+ * @returns {Array}
+ *
+ */
+function unique(arr) {
+
+  var tmp = []
+
+  for (var i = 0, ilen = arr.length; i < ilen; i++) {
+    if (tmp.indexOf(arr[i]) === -1) {
+      tmp.push(arr[i])
+    }
+  }
+
+  return tmp
+
+}
+
 module.exports = {
   shuffle: shuffle,
   sort: sort,
   sortObjects: sortObjects,
-  inverse: inverse
+  inverse: inverse,
+  unique: unique
 }

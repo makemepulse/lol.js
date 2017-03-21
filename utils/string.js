@@ -74,6 +74,16 @@ function camelCase(str) {
 }
 
 /**
+ * Slugify a string and replace tiret to underscore
+ *
+ * @param {String} str
+ * @returns {String}
+ */
+function underscore(str) {
+  return slug(str).replace(/-+/, '_')
+}
+
+/**
  * Append or preprend a character to a string
  *
  * @export
@@ -101,5 +111,6 @@ module.exports = {
   template: template,
   trimWhiteSpace: trimWhiteSpace,
   slug: slug,
-  camelCase: camelCase
+  camelCase: camelCase,
+  underscore: underscore
 }
