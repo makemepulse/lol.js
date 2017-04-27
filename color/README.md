@@ -1,69 +1,57 @@
 # Color
 
-## Format
+## Formats
 
-* **Hex:** `0xffffff`
-* **HexString:** `"ffffff"`
-
-* **CSS (rgb):** `rgb(255, 255, 255)`
-* **CSS (rgba):** `rgba(255, 255, 255, 1)`
-
-* **RGBA:** `[ 255, 255, 255, 255 ]`
-* **RGBA (Normalized):** `[ 1, 1, 1, 1 ]`
+* **Hex:** `0xff0000`
+* **HexString:** `"ff0000"`
+* **CSS (rgb):** `rgb(255, 0, 0)`
+* **CSS (rgba):** `rgba(255, 0, 0, 1)`
+* **RGB:** `[ 255, 0, 0, 255 ]`
+* **RGBA:** `[ 255, 0, 0, 255 ]`
+* **Float:** `[ 1, 1, 1, 1 ]`
 
 ## API
 
-### `ColorUtils.HexStringToHex(str)`
+### `Color.{TYPE}.to{TYPE}(value, out)`
 
-* `{String}` **str** - Hexadecimal string
+Some examples :
 
-### `ColorUtils.HexStringToRGBA(str, normalized?)`
+```js
+Color.CSS.toHexString('rgba(255, 0, 0, 1)') // => "FF0000"
+Color.CSS.toHex('rgba(255, 0, 0, 1)')       // => 0xFF0000FF
 
-* `{String}` **str** - Hexadecimal string
-* `{Boolean?}` **normalized** - Return values between 0 and 1 (optional)
+Color.Float.toRGBA([1, 0, 0])    // => [ 255, 0, 0 ]
+Color.Float.toRGBA([1, 0, 0, 1]) // => [ 255, 0, 0, 255 ]
 
-### `ColorUtils.HexStringToCSS(str)`
+Color.RGBA.toCSS([ 255, 0, 0 ]) // => "rgba(255, 0, 0, 1)"
 
-* `{String}` **str** - Hexadecimal string
+// etc..
+```
 
-### `ColorUtils.HexToHexString(hex)`
+### `Color.{TYPE}.from{TYPE}(value, out)`
 
-* `{Integer}` **hex** - Hexadecimal value
+Some examples :
 
-### `ColorUtils.HexToRGBA(hex)`
+```js
+Color.CSS.fromHexString('FF0000') // => "rgba(255, 0, 0, 1)"
+Color.CSS.fromHex(0xFF0000)       // => "rgba(255, 0, 0, 1)"
 
-* `{Integer}` **hex** - Hexadecimal value
+Color.Float.fromRGBA([ 255, 0, 0 ])      // => [ 1, 0, 0 ]
+Color.Float.fromRGBA([ 255, 0, 0, 255 ]) // => [ 1, 0, 0, 1 ]
 
-### `ColorUtils.HexToCSS(hex)`
+Color.RGBA.fromCSS('rgb(255, 0, 0)') // => "[ 255, 0, 0 ]"
 
-* `{Integer}` **hex** - Hexadecimal value
+// etc..
+```
 
-### `ColorUtils.RGBAToHexString(rgba)`
+### `Color.InterpolateRGBA(out, from, to, t)`
 
-* `{Array}` **rgba** - RGB or RGBA array
+* `{Array}` **out** — Destination
+* `{Array}` **from** - Color from
+* `{Array}` **from** - Color to
+* `{Number}` **t** - Value between 0 and 1
 
-### `ColorUtils.RGBAToHex(rgba)`
-
-* `{Array}` **rgba** - RGB or RGBA array
-
-### `ColorUtils.RGBAToCSS(rgba)`
-
-* `{Array}` **rgba** - RGB or RGBA array
-
-### `ColorsUtils.CSSToHexString(str)`
-
-* `{String}` **str** - CSS string
-
-### `ColorsUtils.CSSToHex(str)`
-
-* `{String}` **str** - CSS string
-
-### `ColorsUtils.CSSToRGBA(str, normalized?)`
-
-* `{String}` **str** - CSS string
-* `{Boolean?}` **normalized** - Return values between 0 and 1 (optional)
-
-### `ColorUtils.InterpolateRGBA(out, from, to, t)`
+### `Color.InterpolateFloat(out, from, to, t)`
 
 * `{Array}` **out** — Destination
 * `{Array}` **from** - Color from
