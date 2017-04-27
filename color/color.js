@@ -21,6 +21,7 @@ var CSS_REGEX = /^rgba|^rgb|\(|\)|\s/gi
  * @property {String}  HexString - Hexadecimal string
  */
 
+
 /**
  * Hexadecimal string to RGBA
  * @memberof Color
@@ -80,10 +81,19 @@ function HexStringToCSS(str) {
  * @memberof Color
  *
  * @param {Hex} hex
+ * @param {Boolean} hasAlpha
  * @returns {HexString}
  */
-function HexToHexString(hex) {
-  return hex.toString(16)
+function HexToHexString(hex, hasAlpha) {
+  var value = hex.toString(16)
+  var size  = hasAlpha ? 8 : 6
+  var str   = hasAlpha ? "0000000" : "00000"
+
+  if (value.length < size) {
+    return  str.substring(0, size - value.length) + value
+  }
+
+  return value
 }
 
 
@@ -96,7 +106,7 @@ function HexToHexString(hex) {
  * @return {RGBA}
  */
 function HexToRGBA(hex, out) {
-  return HexStringToRGBA(HexToHexString(hex), out)
+  return HexStringToRGBA(HexToHexString(hex, !isNaN(out[3])), out)
 }
 
 
@@ -148,10 +158,11 @@ function RGBAToHexString(rgba) {
   var str = ''
 
   for (var i = 0, res, ilen = rgba.length; i < ilen; i++) {
-    res = HexToHexString(rgba[i])
+    res = rgba[i].toString(16)
     res = res.length < 2 ? "0" + res : res
     str += res
   }
+
 
   return str
 }
@@ -266,10 +277,10 @@ function CSSToHex(str) {
  * @returns {RGBA}
  */
 function FloatToRGBA(floats, out) {
-  out[0] = parseInt(floats[0] * 255)
-  out[1] = parseInt(floats[1] * 255)
-  out[2] = parseInt(floats[2] * 255)
-  if (floats[3] >= 0) out[3] = parseInt(floats[3] * 255)
+  out[0] = Math.round(floats[0] * 255)
+  out[1] = Math.round(floats[1] * 255)
+  out[2] = Math.round(floats[2] * 255)
+  if (floats[3] >= 0) out[3] = Math.round(floats[3] * 255)
 
   return out
 }
@@ -390,7 +401,7 @@ function testUnits(values) {
         }
 
         if (!valid) {
-          console.log( type0 + 'To' + type1, valid, res, values[type0] )
+          console.log( type1 + 'To' + type0, valid, res, values[type0] )
           isValid = false
         }
       }
