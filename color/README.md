@@ -2,11 +2,11 @@
 
 ## Formats
 
-* **Hex:** `0xff0000`
-* **HexString:** `"ff0000"`
+* **HexInteger:** `0xff0000`
+* **Hex:** `"ff0000"`
 * **CSS (rgb):** `rgb(255, 0, 0)`
 * **CSS (rgba):** `rgba(255, 0, 0, 1)`
-* **RGB:** `[ 255, 0, 0, 255 ]`
+* **RGB:** `[ 255, 0, 0 ]`
 * **RGBA:** `[ 255, 0, 0, 255 ]`
 * **Float:** `[ 1, 1, 1, 1 ]`
 
@@ -17,7 +17,7 @@
 Some examples :
 
 ```js
-Color.CSS.toHexString('rgba(255, 0, 0, 1)') // => "FF0000"
+Color.CSS.toHexString('rgba(255, 0, 0, 1)') // => "FF0000FF"
 Color.CSS.toHex('rgba(255, 0, 0, 1)')       // => 0xFF0000FF
 
 Color.Float.toRGBA([1, 0, 0])    // => [ 255, 0, 0 ]

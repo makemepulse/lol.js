@@ -1,6 +1,6 @@
 'use strict'
 
-var TYPES = [ 'Hex', 'HexString', 'RGBA', 'Float', 'CSS' ]
+var TYPES = [ 'Hex', 'HexInteger', 'RGBA', 'Float', 'CSS' ]
 
 var CSS_REGEX = /^rgba|^rgb|\(|\)|\s/gi
 var NO_HEXA   = /[^a-f0-9]/gi
@@ -10,8 +10,8 @@ var NO_HEXA   = /[^a-f0-9]/gi
  * @typedef {Number}    Integer — Integer
  * @typedef {Number}    Float — Float
  * @typedef {Integer[]} RGBA — Array of integers
- * @typedef {String}    HexString — Hexadecimal in string
- * @typedef {Number}    Hex — Hexadecimal
+ * @typedef {String}    Hex — Hexadecimal in string
+ * @typedef {Integer}   HexInteger — Hexadecimal
  * @typedef {String}    CSS — CSS String
  *
  * @typedef  {Object}  TestObject
@@ -19,7 +19,7 @@ var NO_HEXA   = /[^a-f0-9]/gi
  * @property {RGBA}    RGBA - RGBA Array
  * @property {Float[]} Float - Float Array
  * @property {Integer} Hex - Hexadecimal value
- * @property {String}  HexString - Hexadecimal string
+ * @property {String}  Hex - Hexadecimal string
  */
 
 
@@ -27,14 +27,14 @@ var NO_HEXA   = /[^a-f0-9]/gi
  * Hexadecimal string to RGBA
  * @memberof Color
  *
- * @param {HexString} str
+ * @param {Hex} str
  * @param {RGBA} out
  */
-function HexStringToRGBA(str, out) {
+function HexToRGBA(str, out) {
   var split = str.replace(NO_HEXA, '').match(/.{2}/g)
 
   for (var i = 0, ilen = split.length; i < ilen; i++) {
-    out[i] = HexStringToHex(split[i])
+    out[i] = HexToHexInteger(split[i])
   }
 
   return out
@@ -45,11 +45,11 @@ function HexStringToRGBA(str, out) {
  * Hexadecimal string to Float[]
  * @memberof Color
  *
- * @param {HexString} str
+ * @param {Hex} str
  * @returns {Float[]}
  */
-function HexStringToFloat(str, out) {
-  return RGBAToFloat(HexStringToRGBA(str.replace(NO_HEXA, ''), out), out)
+function HexToFloat(str, out) {
+  return RGBAToFloat(HexToRGBA(str.replace(NO_HEXA, ''), out), out)
 }
 
 
@@ -57,10 +57,10 @@ function HexStringToFloat(str, out) {
  * Hexadecimal string to hexadecimal
  * @memberof Color
  *
- * @param {HexString} str
+ * @param {Hex} str
  * @returns {Hex}
  */
-function HexStringToHex(str) {
+function HexToHexInteger(str) {
   return parseInt(str.replace(NO_HEXA, ''), 16)
 }
 
@@ -69,11 +69,11 @@ function HexStringToHex(str) {
  * Hexadecimal string to CSS
  * @memberof Color
  *
- * @param {HexString} str
+ * @param {Hex} str
  * @return {CSS}
  */
-function HexStringToCSS(str) {
-  return RGBAToCSS(HexStringToRGBA(str.replace(NO_HEXA, ''), []))
+function HexToCSS(str) {
+  return RGBAToCSS(HexToRGBA(str.replace(NO_HEXA, ''), []))
 }
 
 
@@ -84,8 +84,8 @@ function HexStringToCSS(str) {
  * @param {RGBA} rgba
  * @return {Hex}
  */
-function RGBAToHex(rgba) {
-  return HexStringToHex(RGBAToHexString(rgba))
+function RGBAToHexInteger(rgba) {
+  return HexToHexInteger(RGBAToHex(rgba))
 }
 
 
@@ -94,9 +94,9 @@ function RGBAToHex(rgba) {
  * @memberof Color
  *
  * @param {RGBA} rgba
- * @return {HexString}
+ * @return {Hex}
  */
-function RGBAToHexString(rgba) {
+function RGBAToHex(rgba) {
   var str = ''
 
   for (var i = 0, res, ilen = rgba.length; i < ilen; i++) {
@@ -118,8 +118,11 @@ function RGBAToHexString(rgba) {
  * @return {CSS}
  */
 function RGBAToCSS(rgba) {
-  var alpha = rgba[3] >= 0 ? rgba[3] / 255 : 1
-  return 'rgba('+rgba[0]+', '+rgba[1]+', '+rgba[2]+', '+alpha+')'
+  if (rgba[3] >= 0) {
+    return 'rgba('+rgba[0]+', '+rgba[1]+', '+rgba[2]+', '+(rgba[3] / 255)+')'
+  }
+
+  return 'rgb('+rgba[0]+', '+rgba[1]+', '+rgba[2]+')'
 }
 
 
@@ -192,10 +195,10 @@ function CSSToFloat(str, out) {
  * @memberof Color
  *
  * @param {CSS} str
- * @returns {HexString}
+ * @returns {Hex}
  */
-function CSSToHexString(str) {
-  return RGBAToHexString(CSSToRGBA(str, []))
+function CSSToHex(str) {
+  return RGBAToHex(CSSToRGBA(str, []))
 }
 
 
@@ -206,8 +209,8 @@ function CSSToHexString(str) {
  * @param {CSS} str
  * @returns {Hex}
  */
-function CSSToHex(str) {
-  return RGBAToHex(CSSToRGBA(str, []))
+function CSSToHexInteger(str) {
+  return RGBAToHexInteger(CSSToRGBA(str, []))
 }
 
 
@@ -235,8 +238,8 @@ function FloatToRGBA(floats, out) {
  * @param {Float[]} floats
  * @returns {Hex}
  */
-function FloatToHex(floats) {
-  return RGBAToHex(FloatToRGBA(floats, []))
+function FloatToHexInteger(floats) {
+  return RGBAToHexInteger(FloatToRGBA(floats, []))
 }
 
 
@@ -245,10 +248,10 @@ function FloatToHex(floats) {
  * @memberof Color
  *
  * @param {Float[]} floats
- * @returns {HexString}
+ * @returns {Hex}
  */
-function FloatToHexString(floats) {
-  return RGBAToHexString(FloatToRGBA(floats, []))
+function FloatToHex(floats) {
+  return RGBAToHex(FloatToRGBA(floats, []))
 }
 
 
@@ -322,8 +325,8 @@ function testUnits(values) {
       CSS: 'rgba(255, 0, 0, 1)',
       RGBA: [ 255, 0, 0, 255 ],
       Float: [ 1, 0, 0, 1 ],
-      Hex: 0xff0000ff,
-      HexString: 'ff0000ff'
+      HexInteger: 0xff0000ff,
+      Hex: 'ff0000ff'
     }
   }
 
@@ -337,9 +340,6 @@ function testUnits(values) {
 
         if (Array.isArray(res)) {
           valid = res.join(',') === values[type0].join(',')
-        } else if (typeof res === 'string' && res.match(/rgba\(/) && values[type0].match(/rgb\(/)) {
-          var split = res.replace(CSS_REGEX, '').split(',')
-          valid = 'rgb('+split[0]+', '+split[1]+', '+split[2]+')' === values[type0]
         }
 
         if (!valid) {
@@ -359,53 +359,53 @@ function testUnits(values) {
  * @export
  */
 var EXPORTS = {
+  HexInteger: {
+    fromHex: HexToHexInteger,
+    fromFloat: FloatToHexInteger,
+    fromRGBA: RGBAToHexInteger,
+    fromCSS: CSSToHexInteger,
+  },
+
   Hex: {
-    fromHexString: HexStringToHex,
+    toHexInteger: HexToHexInteger,
+    toRGBA: HexToRGBA,
+    toCSS: HexToCSS,
+    toFloat: HexToFloat,
+
     fromFloat: FloatToHex,
     fromRGBA: RGBAToHex,
     fromCSS: CSSToHex,
   },
 
-  HexString: {
-    toHex: HexStringToHex,
-    toRGBA: HexStringToRGBA,
-    toCSS: HexStringToCSS,
-    toFloat: HexStringToFloat,
-
-    fromFloat: FloatToHexString,
-    fromRGBA: RGBAToHexString,
-    fromCSS: CSSToHexString,
-  },
-
   Float: {
-    toHexString: FloatToHexString,
     toHex: FloatToHex,
+    toHexInteger: FloatToHexInteger,
     toRGBA: FloatToRGBA,
     toCSS: FloatToCSS,
 
-    fromHexString: HexStringToFloat,
+    fromHex: HexToFloat,
     fromRGBA: RGBAToFloat,
     fromCSS: CSSToFloat,
   },
 
   RGBA: {
-    toHexString: RGBAToHexString,
     toHex: RGBAToHex,
+    toHexInteger: RGBAToHexInteger,
     toCSS: RGBAToCSS,
     toFloat: RGBAToFloat,
 
-    fromHexString: HexStringToRGBA,
+    fromHex: HexToRGBA,
     fromFloat: FloatToRGBA,
     fromCSS: CSSToRGBA,
   },
 
   CSS: {
-    toHexString: CSSToHexString,
     toHex: CSSToHex,
+    toHexInteger: CSSToHexInteger,
     toRGBA: CSSToRGBA,
     toFloat: CSSToFloat,
 
-    fromHexString: HexStringToCSS,
+    fromHex: HexToCSS,
     fromFloat: FloatToCSS,
     fromRGBA: RGBAToCSS,
   },
