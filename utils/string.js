@@ -89,7 +89,7 @@ function toSlug(str) {
  * @returns {String}
  */
 function toCamelCase(str) {
-  str = slug(str)
+  str = toSlug(str)
 
   const words = str.split('-').map(function(word) {
     return word.slice(0, 1).toUpperCase() + word.slice(1)
@@ -106,7 +106,7 @@ function toCamelCase(str) {
  * @returns {String}
  */
 function toUnderscore(str) {
-  return slug(str).replace(/-+/, '_')
+  return toSlug(str).replace(/-+/, '_')
 }
 
 module.exports = {
