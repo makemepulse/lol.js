@@ -1,7 +1,7 @@
-# LOL!js
+# lol.js
 
 Useful list of files/librairies
 
-* [RAF](https://github.com/makemepulse/lol.js/tree/master/raf)
+* [RAF](raf/README.md)
 * [Color](color/README.md)
 * [Utils](utils/README.md)

@@ -1,31 +1,31 @@
 'use strict'
 
-function email(email) {
+module.exports.email = function email(email) {
   if (!isString(email)) return false
   if (empty(email)) return false
   if (email.match(/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/g) === null) return false
   return true
 }
 
-function min(string, min) {
+module.exports.min = function min(string, min) {
   if (typeof string === "number") return string >= min
   return string.length >= min
 }
 
-function max(string, max) {
+module.exports.max = function max(string, max) {
   if (typeof string === "number") return string <= max
   return string.length <= max
 }
 
-function length(string, len) {
+module.exports.length = function length(string, len) {
   return equal(string.length === len)
 }
 
-function equal(value, equalValue) {
+module.exports.equal = function equal(value, equalValue) {
   return value === equalValue
 }
 
-function empty(value) {
+module.exports.empty = function empty(value) {
   var valid = false
 
   if (typeof value === "undefined") valid = true
@@ -36,44 +36,31 @@ function empty(value) {
   return valid
 }
 
-function isset(value) {
+module.exports.isset = function isset(value) {
   return !empty(value)
 }
 
-function optional() {
+module.exports.optional( = function optional() {
   return true
 }
 
-function isUndefined(value) {
+module.exports.isUndefined = function isUndefined(value) {
   return typeof value === 'undefined'
 }
 
-function isNull(value) {
+module.exports.isNull = function isNull(value) {
   return value === null
 }
 
-function isString(value) {
+module.exports.isString = function isString(value) {
   return typeof value === 'string' && isset(value)
 }
 
-function isNumber(value) {
+module.exports.isNumber = function isNumber(value) {
   var v = parseInt(value)
   return typeof v === 'number' && !isNaN(v)
 }
 
-function isBoolean(value) {
+module.exports.isBoolean = function isBoolean(value) {
   return typeof value === 'boolean'
-}
-
-module.exports = {
-  email: email,
-  min: min,
-  max: max,
-  length: length,
-  optional: optional,
-  isUndefined: isUndefined,
-  isNull: isNull,
-  isString: isString,
-  isNumber: isNumber,
-  isBoolean: isBoolean
 }
