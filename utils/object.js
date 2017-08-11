@@ -68,7 +68,7 @@ module.exports.clone = function clone(obj) {
   return cloneObj
 }
 
-module.exports.flatten = function flatten(obj, keys) {
+module.exports.expose = function expose(obj, keys) {
 
   var xprt = {}
 
@@ -80,4 +80,21 @@ module.exports.flatten = function flatten(obj, keys) {
 
   return xprt
 
+}
+
+module.exports.flatten = function flatten(data) {
+  var obj = {}
+
+  for (var key in data) {
+    if (typeof data[key] === 'object') {
+      var children = reduce(data[key])
+      for (var k in children) {
+        obj[key + '.' + k] = children[k]
+      }
+    } else {
+      obj[key] = data[key]
+    }
+  }
+
+  return obj
 }
