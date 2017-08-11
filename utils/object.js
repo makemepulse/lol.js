@@ -36,7 +36,7 @@ function _merge(obj0, obj1) {
  */
 function merge() {
   const objs = Array.prototype.slice.apply(arguments)
-  const obj  = objs.shift()
+  let obj    = objs.shift()
 
   let i   = 0
   let len = objs.length
