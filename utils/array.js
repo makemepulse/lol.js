@@ -8,7 +8,7 @@
  * @returns {Array}
  *
  */
-module.exports.shuffle = function shuffle(arr) {
+function shuffle(arr) {
   var length = arr.length
   var tmp, rand
 
@@ -32,7 +32,7 @@ module.exports.shuffle = function shuffle(arr) {
  * @returns {Array} Sorted array
  *
  */
-module.exports.sort = function sort(arr) {
+function sort(arr) {
   var tmp       = []
   var currIndex = -1
   var tm        = -1
@@ -64,7 +64,7 @@ module.exports.sort = function sort(arr) {
  * @returns {Array} Sorted array
  *
  */
-module.exports.sortObjects = function sortObjects(arr, key) {
+function sortObjects(arr, key) {
   var tmp       = []
   var currIndex = -1
   var tm        = -1
@@ -95,7 +95,7 @@ module.exports.sortObjects = function sortObjects(arr, key) {
  * @returns {Array}
  *
  */
-module.exports.inverse = function inverse(arr) {
+function inverse(arr) {
   var tmp = []
 
   for(var ilen = arr.length-1, i = ilen; i >= 0; i--) {
@@ -114,7 +114,7 @@ module.exports.inverse = function inverse(arr) {
  * @returns {Array}
  *
  */
-module.exports.unique = function unique(arr) {
+function unique(arr) {
 
   var tmp = []
 
@@ -127,3 +127,5 @@ module.exports.unique = function unique(arr) {
   return tmp
 
 }
+
+module.exports = { shuffle, sort, sortObjects, inverse, unique }

@@ -1,7 +1,7 @@
 'use strict'
 
 // SOURCE: http://www.html5canvastutorials.com/advanced/html5-canvas-ovals/
-module.exports.drawEllipse = function drawEllipse(ctx, centerX, centerY, width, height) {
+function drawEllipse(ctx, centerX, centerY, width, height) {
   ctx.save()
 
   ctx.scale(width / width, height / width)
@@ -9,3 +9,5 @@ module.exports.drawEllipse = function drawEllipse(ctx, centerX, centerY, width, 
 
   ctx.restore()
 }
+
+module.exports = { drawEllipse }

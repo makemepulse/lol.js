@@ -13,7 +13,7 @@ var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g')
  * @param {Object} obj
  * @returns {String}
  */
-module.exports.template = function template( string, obj ) {
+function template( string, obj ) {
 
   obj = obj || {}
   var value, str = string
@@ -35,7 +35,7 @@ module.exports.template = function template( string, obj ) {
  * @param {String} str
  * @returns {String}
  */
-module.exports.trimWhiteSpace = function trimWhiteSpace(str) {
+function trimWhiteSpace(str) {
   return str.replace(TRIM_SPACE_REGEX, '')
 }
 
@@ -50,7 +50,7 @@ module.exports.trimWhiteSpace = function trimWhiteSpace(str) {
  * @param {Boolean} [insertAfter]
  * @returns {String}
  */
-module.exports.pad = function pad(str, limit, char, insertAfter) {
+function pad(str, limit, char, insertAfter) {
   var s = str.toString()
 
   if (s.length < limit) {
@@ -72,7 +72,7 @@ module.exports.pad = function pad(str, limit, char, insertAfter) {
  * @param {String} str
  * @returns {String}
  */
-module.exports.toSlug = function toSlug(str) {
+function toSlug(str) {
   return str.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
     .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
@@ -89,7 +89,7 @@ module.exports.toSlug = function toSlug(str) {
  * @param {String} str
  * @returns {String}
  */
-module.exports.toCamelCase = function toCamelCase(str) {
+function toCamelCase(str) {
   str = toSlug(str)
 
   const words = str.split('-').map(function(word) {
@@ -106,6 +106,8 @@ module.exports.toCamelCase = function toCamelCase(str) {
  * @param {String} str
  * @returns {String}
  */
-module.exports.toUnderscore = function toUnderscore(str) {
+function toUnderscore(str) {
   return toSlug(str).replace(/-+/, '_')
 }
+
+module.exports = { template, trimWhiteSpace, pad, toSlug, toCamelCase, toUnderscore }

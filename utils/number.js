@@ -8,7 +8,7 @@
  * @param {Number} [max=1]
  * @returns {Number}
  */
-module.exports.clamp = function clamp(value, min, max) {
+function clamp(value, min, max) {
   if (min === undefined) min = 0
   if (max === undefined) max = 1
   return Math.max(min, Math.min(value, max))
@@ -20,7 +20,7 @@ module.exports.clamp = function clamp(value, min, max) {
  * @param {Number} radian
  * @returns {Number}
  */
-module.exports.toDegree = function toDegree(radian) {
+function toDegree(radian) {
   return radian / Math.PI * 180
 }
 
@@ -30,6 +30,8 @@ module.exports.toDegree = function toDegree(radian) {
  * @param {Number} degree
  * @returns {Number}
  */
-module.exports.toRadian = function toRadian(degree) {
+function toRadian(degree) {
   return degree / 180 * Math.PI
 }
+
+module.exports = { clamp, toDegree, toRadian }

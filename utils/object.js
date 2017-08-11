@@ -2,25 +2,12 @@
 
 const ArrayUtils = require('./array')
 
-/**
- * Merge objects, concat array and keep unique value
- *
- * @param {Object} obj0
- * @param {Object} obj1
- * @returns
- */
-module.exports.merge = function merge(obj0, obj1) {
-
+function _merge(obj0, obj1) {
   for (var key in obj1) {
 
-    // Concat array and remove duplicates
+    // Duplicate array and override
     if (Array.isArray(obj1[key])) {
-      if (Array.isArray(obj0[key])) {
-        obj0[key] = obj0[key].concat(obj1[key])
-        obj0[key] = ArrayUtils.unique(obj0[key])
-      } else {
-        obj0[key] = obj1[key]
-      }
+      obj0[key] = obj1[key].slice(0)
     }
 
     // Merge object
@@ -40,10 +27,35 @@ module.exports.merge = function merge(obj0, obj1) {
   }
 
   return obj0
-
 }
 
-module.exports.clone = function clone(obj) {
+/**
+ * Merge objects
+ *
+ * @returns {Object}
+ */
+function merge() {
+  const objs = Array.prototype.slice.apply(arguments)
+  const obj  = objs.shift()
+
+  let i   = 0
+  let len = objs.length
+
+  for (i = 0; i < len; i++) {
+    obj = _merge(obj, objs[i])
+  }
+
+  return obj
+}
+
+
+/**
+ * Make a copy of the object
+ *
+ * @param {Object} obj
+ * @returns {Object}
+ */
+function clone(obj) {
   var cloneObj = {}
 
   for (var key in obj) {
@@ -68,7 +80,14 @@ module.exports.clone = function clone(obj) {
   return cloneObj
 }
 
-module.exports.expose = function expose(obj, keys) {
+/**
+ * Create an object with only property keys
+ *
+ * @param {Object} obj
+ * @param {Array} keys
+ * @returns {Object}
+ */
+function expose(obj, keys) {
 
   var xprt = {}
 
@@ -82,19 +101,27 @@ module.exports.expose = function expose(obj, keys) {
 
 }
 
-module.exports.flatten = function flatten(data) {
-  var obj = {}
+/**
+ * Flatten object to one level
+ *
+ * @param {Object} obj
+ * @returns
+ */
+function flatten(obj) {
+  var xprt = {}
 
-  for (var key in data) {
-    if (typeof data[key] === 'object') {
-      var children = reduce(data[key])
+  for (var key in obj) {
+    if (typeof obj[key] === 'object') {
+      var children = reduce(obj[key])
       for (var k in children) {
-        obj[key + '.' + k] = children[k]
+        xprt[key + '.' + k] = children[k]
       }
     } else {
-      obj[key] = data[key]
+      xprt[key] = obj[key]
     }
   }
 
   return obj
 }
+
+module.exports = { merge, clone, expose, flatten }
