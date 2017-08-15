@@ -1,0 +1,59 @@
+rules:
+  indent: 0
+  quotes: 0
+  linebreak-style: [2, "unix"]
+  semi: 0
+  no-console: 0
+  prefer-const: 2
+
+globals:
+  $: true
+  jQuery: true
+  Vue: true
+  TimelineLite: true
+  TweenLite: true
+  Ease: true
+  wk: true
+  task: true
+  taskProcess: true
+  command: true
+  desc: true
+  namespace: true
+  complete: true
+  serie: true
+  parallel: true
+  fail: true
+
+ecmaFeatures:
+  arrowFunctions: true
+  binaryLiterals: true
+  blockBindings: true
+  classes: true
+  defaultParams: true
+  destructuring: true
+  forOf: false
+  generators: false
+  modules: true
+  objectLiteralComputedProperties: false
+  objectLiteralDuplicateProperties: false
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  octalLiterals: false
+  regexUFlag: false
+  regexYFlag: false
+  restParams: true
+  spread: true
+  superInFunctions: true
+  templateStrings: true
+  unicodeCodePointEscapes: false
+
+env:
+  es6: true
+  browser: true
+  node: true
+
+parserOptions:
+  sourceType: "module"
+
+
+extends: 'eslint:recommended'
