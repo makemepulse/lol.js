@@ -112,7 +112,7 @@ function flatten(obj) {
 
   for (var key in obj) {
     if (typeof obj[key] === 'object') {
-      var children = reduce(obj[key])
+      var children = flatten(obj[key])
       for (var k in children) {
         xprt[key + '.' + k] = children[k]
       }
