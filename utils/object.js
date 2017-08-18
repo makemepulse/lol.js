@@ -121,7 +121,25 @@ function flatten(obj) {
     }
   }
 
-  return obj
+  return xprt
 }
 
-module.exports = { merge, clone, expose, flatten }
+function deflat(obj) {
+  const xprt = {}
+
+  let i, ilen, keys
+
+  for (const key in obj) {
+    keys = key.split('.')
+
+    for (i = 0, ilen = keys.length; i < ilen; i++) {
+      xprt[keys[i]] = xprt[keys[i]] || {}
+    }
+
+    xprt[keys[ilen-1]] = obj[key]
+  }
+
+  return xprt
+}
+
+module.exports = { merge, clone, expose, flatten, deflat }
