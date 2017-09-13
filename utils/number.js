@@ -34,4 +34,15 @@ function toRadian(degree) {
   return degree / 180 * Math.PI
 }
 
-module.exports = { clamp, toDegree, toRadian }
+/**
+ * Set float precision
+ *
+ * @param {Number} num
+ * @param {Number} precision
+ * @returns
+ */
+function precision(num, precision) {
+  return parseInt(num, Math.pow(10, precision)) / Math.pow(10, precision)
+}
+
+module.exports = { clamp, toDegree, toRadian, precision }
