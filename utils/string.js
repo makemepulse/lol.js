@@ -92,7 +92,7 @@ function toSlug(str) {
 function toCamelCase(str) {
   str = toSlug(str)
 
-  const words = str.split('-').map(function(word) {
+  var words = str.split('-').map(function(word) {
     return word.slice(0, 1).toUpperCase() + word.slice(1)
   })
 
@@ -110,4 +110,20 @@ function toUnderscore(str) {
   return toSlug(str).replace(/-+/, '_')
 }
 
-module.exports = { template, trimWhiteSpace, pad, toSlug, toCamelCase, toUnderscore }
+function toCapitalize(str) {
+  var strs = str.split(/\s/g)
+  strs = strs.map(function(s) {
+    return s[0].toUpperCase() + s.slice(1).toLowerCase()
+  })
+  return strs.join(' ')
+}
+
+module.exports = {
+  template,
+  trimWhiteSpace,
+  pad,
+  toSlug,
+  toCamelCase,
+  toUnderscore,
+  toCapitalize
+}
