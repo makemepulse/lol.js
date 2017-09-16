@@ -1,7 +1,5 @@
 'use strict'
 
-const ArrayUtils = require('./array')
-
 function _merge(obj0, obj1) {
   for (var key in obj1) {
 
@@ -35,11 +33,11 @@ function _merge(obj0, obj1) {
  * @returns {Object}
  */
 function merge() {
-  const objs = Array.prototype.slice.apply(arguments)
-  let obj    = objs.shift()
+  var objs = Array.prototype.slice.apply(arguments)
+  var obj  = objs.shift()
 
-  let i   = 0
-  let len = objs.length
+  var i   = 0
+  var len = objs.length
 
   for (i = 0; i < len; i++) {
     obj = _merge(obj, objs[i])
@@ -125,11 +123,11 @@ function flatten(obj) {
 }
 
 function deflat(obj) {
-  const xprt = {}
+  var xprt = {}
 
-  let i, ilen, keys
+  var i, ilen, keys
 
-  for (const key in obj) {
+  for (var key in obj) {
     keys = key.split('.')
 
     for (i = 0, ilen = keys.length; i < ilen; i++) {

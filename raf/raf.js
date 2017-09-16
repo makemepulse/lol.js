@@ -15,7 +15,7 @@
  * RAF.stop()
  */
 
-const requestAnimFrame = (function(){
+var requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||
           window.mozRequestAnimationFrame    ||
@@ -25,7 +25,7 @@ const requestAnimFrame = (function(){
 })();
 
 
-const cancelRequestAnimFrame = ( function() {
+var cancelRequestAnimFrame = ( function() {
   return window.cancelAnimationFrame          ||
     window.webkitCancelRequestAnimationFrame  ||
     window.mozCancelRequestAnimationFrame     ||
@@ -81,7 +81,7 @@ proto._processUpdate = function(){
 
   for ( var i = 0; i < this.subscribers.length; i++ ) {
 
-    const subscriber = this.subscribers[i];
+    var subscriber = this.subscribers[i];
 
     // execute handler
     subscriber[1]();
