@@ -100,10 +100,32 @@ function expose(obj, keys) {
 }
 
 /**
+ * Create a new object without listed property keys
+ *
+ * @param {Object} obj
+ * @param {Array} keys
+ * @returns {Object}
+ */
+function omit(obj, keys) {
+
+  var xprt = {}
+
+  for (const key in obj) {
+    if (keys.indexOf(key) == -1) {
+      xprt[key] = obj[key]
+    }
+  }
+
+  return xprt
+
+}
+
+
+/**
  * Flatten object to one level
  *
  * @param {Object} obj
- * @returns
+ * @returns {Object}
  */
 function flatten(obj) {
   var xprt = {}
@@ -122,6 +144,12 @@ function flatten(obj) {
   return xprt
 }
 
+/**
+ * Transform a flatten object to a deflatten object
+ *
+ * @param {Object} obj
+ * @returns {Object}
+ */
 function deflat(obj) {
   var xprt = {}
 
@@ -140,4 +168,26 @@ function deflat(obj) {
   return xprt
 }
 
-module.exports = { merge, clone, expose, flatten, deflat }
+
+/**
+ * Scope a function inside another one. Prevent binding.
+ *
+ * @param {Object} obj
+ * @param {Function} fn
+ */
+function scope( obj, fn ) {
+  return function $scope(){
+    fn.apply(obj, arguments)
+  }
+}
+
+module.exports = {
+  merge: merge,
+  clone: clone,
+  expose: expose,
+  omit: omit,
+  pick: expose,
+  flatten: flatten,
+  deflat: deflat,
+  scope:scope
+}

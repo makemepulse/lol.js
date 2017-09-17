@@ -119,11 +119,11 @@ function toCapitalize(str) {
 }
 
 module.exports = {
-  template,
-  trimWhiteSpace,
-  pad,
-  toSlug,
-  toCamelCase,
-  toUnderscore,
-  toCapitalize
+  template: template,
+  trimWhiteSpace: trimWhiteSpace,
+  pad: pad,
+  toSlug: toSlug,
+  toCamelCase: toCamelCase,
+  toUnderscore: toUnderscore,
+  toCapitaliz: toCapitalize
 }

@@ -128,4 +128,10 @@ function unique(arr) {
 
 }
 
-module.exports = { shuffle, sort, sortObjects, inverse, unique }
+module.exports = {
+  shuffle: shuffle,
+  sort: sort,
+  sortObjects: sortObjects,
+  inverse: inverse,
+  unique: unique
+}

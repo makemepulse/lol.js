@@ -65,4 +65,18 @@ function isBoolean(value) {
   return typeof value === 'boolean'
 }
 
-module.exports = { email, min, max, length, equal, empty, isset, optional, isUndefined, isNull, isString, isNumber, isBoolean }
+module.exports = {
+  email: email,
+  min: min,
+  max: max,
+  length: length,
+  equal: equal,
+  empty: empty,
+  isset: isset,
+  optional: optional,
+  isUndefined: isUndefined,
+  isNull: isNull,
+  isString: isString,
+  isNumber: isNumber,
+  isBoolean: isBoolean
+}

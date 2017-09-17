@@ -11,4 +11,7 @@ function guid() {
   s4() + '-' + s4() + s4() + s4();
 }
 
-module.exports = { guid, s4 }
+module.exports = {
+  guid: guid,
+  s4: s4
+}

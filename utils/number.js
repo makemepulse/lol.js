@@ -45,4 +45,9 @@ function precision(num, precision) {
   return parseInt(num * Math.pow(10, precision)) / Math.pow(10, precision)
 }
 
-module.exports = { clamp, toDegree, toRadian, precision }
+module.exports = {
+  clamp: clamp,
+  toDegree: toDegree,
+  toRadian: toRadian,
+  precision: precision
+}

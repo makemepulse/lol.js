@@ -10,4 +10,6 @@ function drawEllipse(ctx, centerX, centerY, width, height) {
   ctx.restore()
 }
 
-module.exports = { drawEllipse }
+module.exports = {
+  drawEllipse: drawEllipse
+}
