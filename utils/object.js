@@ -169,18 +169,6 @@ function deflat(obj) {
 }
 
 
-/**
- * Scope a function inside another one. Prevent binding.
- *
- * @param {Object} obj
- * @param {Function} fn
- */
-function scope( obj, fn ) {
-  return function $scope(){
-    fn.apply(obj, arguments)
-  }
-}
-
 module.exports = {
   merge: merge,
   clone: clone,
@@ -188,6 +176,5 @@ module.exports = {
   omit: omit,
   pick: expose,
   flatten: flatten,
-  deflat: deflat,
-  scope:scope
+  deflat: deflat
 }
