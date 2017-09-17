@@ -4,9 +4,9 @@
  * @param {Object} obj
  * @param {Function} fn
  */
-function scope( obj, fn ) {
+function scope( fn, ctx ) {
   return function $scope(){
-    return fn.apply(obj, arguments)
+    return fn.apply(ctx, arguments)
   }
 }
 
