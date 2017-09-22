@@ -110,7 +110,7 @@ function omit(obj, keys) {
 
   var xprt = {}
 
-  for (const key in obj) {
+  for (var key in obj) {
     if (keys.indexOf(key) == -1) {
       xprt[key] = obj[key]
     }

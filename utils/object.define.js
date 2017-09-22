@@ -42,7 +42,7 @@ function $readOnly(obj, property) {
 }
 
 function $private(obj, property) {
-  let descriptor = Object.getOwnPropertyDescriptor(obj, property)
+  var descriptor = Object.getOwnPropertyDescriptor(obj, property)
 
   if (!descriptor && obj.hasOwnProperty(property)) {
     descriptor = {
@@ -57,10 +57,10 @@ function $private(obj, property) {
 
   if (!descriptor) return
 
-  const getter = descriptor.get
-  const setter = descriptor.set
+  var getter = descriptor.get
+  var setter = descriptor.set
 
-  let value = descriptor.default
+  var value = descriptor.default
 
   if (getter) descriptor.get = function $get() {
     if (assertCalledBy(getter, $get)) {
