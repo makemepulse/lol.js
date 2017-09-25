@@ -13,14 +13,14 @@ var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g')
  * @param {Object} obj
  * @returns {String}
  */
-function template( string, obj ) {
+function template( string, obj, regex ) {
 
   obj = obj || {}
   var value, str = string
 
   for (var key in obj) {
     value = obj[key]
-    str   = str.replace( _TEMPLATE_REGEX(key), value )
+    str   = str.replace( regex ? regex(key) : _TEMPLATE_REGEX(key), value )
   }
 
   return str
