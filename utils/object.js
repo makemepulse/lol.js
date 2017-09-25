@@ -168,6 +168,26 @@ function deflat(obj) {
   return xprt
 }
 
+/**
+ * Freeze object
+ *
+ * @param {Objec} obj
+ * @returns {Object} Immutable object
+ */
+function immutable(obj) {
+  var propNames = Object.getOwnPropertyNames(obj)
+
+  propNames.forEach(function(name) {
+    var prop = obj[name]
+
+    if (typeof prop == 'object' && prop !== null) {
+      immutable(prop)
+    }
+  })
+
+  return Object.isFrozen(obj) ? obj : Object.freeze(obj)
+}
+
 
 module.exports = {
   merge: merge,
@@ -176,5 +196,6 @@ module.exports = {
   omit: omit,
   pick: expose,
   flatten: flatten,
-  deflat: deflat
+  deflat: deflat,
+  immutable: immutable
 }
