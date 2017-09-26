@@ -128,10 +128,30 @@ function unique(arr) {
 
 }
 
+'use strict'
+
+/**
+ * Split array into chunks
+ *
+ * @param {Array} array
+ * @param {Number} count
+ * @returns {Array}
+ */
+function chunk(array, count) {
+  const arr = []
+
+  for (let i = 0, ilen = array.length; i < ilen; i += count) {
+    arr.push( array.slice(i, i+count) )
+  }
+
+  return arr
+}
+
 module.exports = {
   shuffle: shuffle,
   sort: sort,
   sortObjects: sortObjects,
   inverse: inverse,
-  unique: unique
+  unique: unique,
+  chunk: chunk
 }
