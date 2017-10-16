@@ -4,6 +4,10 @@ function _TEMPLATE_REGEX( key ) {
   return new RegExp("\\$\\{"+key+"\\}", 'g')
 }
 
+function _TEMPLATE_ESCAPE_REGEX(str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
 var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g')
 
 /**
@@ -27,6 +31,57 @@ function template( string, obj, regex ) {
 
 }
 
+/**
+ * Interpolate string with the object
+ *
+ * @param {String} string
+ * @param {Object} obj
+ * @param {Object} options
+ * @param {String} options.open
+ * @param {String} options.body
+ * @param {String} options.close
+ * @returns {String}
+ */
+function template2( string, obj, options ) {
+
+  obj = obj || {}
+  options = Object.assign({
+    open: '${',
+    body: '[a-z@$#-_?!]+',
+    close: '}'
+  }, options || {})
+  var value, str = string
+
+  var matches  = str.match(new RegExp(
+    _TEMPLATE_ESCAPE_REGEX(options.open) +
+    options.body +
+    _TEMPLATE_ESCAPE_REGEX(options.close)
+  , 'g')) || []
+
+  var nmatches = matches.map(function(m) { return '' })
+
+  for (var key in obj) {
+    value = obj[key]
+
+    if (typeof value === 'string') {
+      nmatches = nmatches.map(function(m, index) {
+        if (matches[index].match(new RegExp(key))) {
+          var s = matches[index].replace( key, value )
+          return s.slice(options.open.length, s.length-options.close.length)
+        }
+
+        return m
+      })
+    }
+  }
+
+  matches.forEach(function(m, index) {
+    str = str.replace(m, nmatches[index])
+  })
+
+  return str
+
+}
 
 /**
  * Remove white spaces at the beginning and at the end of the string
@@ -120,6 +175,7 @@ function toCapitalize(str) {
 
 module.exports = {
   template: template,
+  template2: template2,
   trimWhiteSpace: trimWhiteSpace,
   pad: pad,
   toSlug: toSlug,
