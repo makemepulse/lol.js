@@ -15,7 +15,7 @@
  * RAF.stop()
  */
 
-var requestAnimFrame = (function(){
+window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||
           window.mozRequestAnimationFrame    ||
@@ -25,7 +25,7 @@ var requestAnimFrame = (function(){
 })();
 
 
-var cancelRequestAnimFrame = ( function() {
+window.cancelRequestAnimFrame = ( function() {
   return window.cancelAnimationFrame          ||
     window.webkitCancelRequestAnimationFrame  ||
     window.mozCancelRequestAnimationFrame     ||
@@ -49,7 +49,7 @@ function RAF(){
   this.dt = 0;
   this.framerate = 16;
 
-  _raf = requestAnimFrame( this.update );
+  _raf = window.requestAnimFrame( this.update );
 
 }
 
@@ -73,7 +73,7 @@ proto._update = function(){
 
   _lt = _now;
 
-  _raf = requestAnimFrame( this.update );
+  _raf = window.requestAnimFrame( this.update );
 
 }
 
@@ -125,7 +125,7 @@ proto.unsubscribe = function( id ) {
  */
 proto.start = function() {
 
-  _raf = requestAnimFrame( this.update );
+  _raf = window.requestAnimFrame( this.update );
 
 }
 
@@ -134,7 +134,7 @@ proto.start = function() {
  */
 proto.stop = function() {
 
-  cancelRequestAnimFrame( _raf );
+  window.cancelRequestAnimFrame( _raf );
 
 }
 
