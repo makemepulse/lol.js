@@ -278,21 +278,21 @@ declare module 'lol/utils/object' {
 
 declare module 'lol/utils/string' {
 
-  export function template() : string;
+  export function template(string:string, obj?:any, regex?:RegExp) : string;
 
-  export function template2() : string;
+  export function template2(string:string, obj?:any, options?:any) : string;
 
-  export function trimWhiteSpace() : string;
+  export function trimWhiteSpace(str:string) : string;
 
-  export function pad() : string;
+  export function pad(str:string, limit:number, char:string, insertAfter:boolean) : string;
 
-  export function toSlug() : string;
+  export function toSlug(str:string) : string;
 
-  export function toCamelCase() : string;
+  export function toCamelCase(str:string) : string;
 
-  export function toUnderscore() : string;
+  export function toUnderscore(str:string) : string;
 
-  export function toCapitalize() : string;
+  export function toCapitalize(str:string) : string;
 
 }
 
