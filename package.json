@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.8-beta.1",
+  "version": "0.0.8",
   "description": "Useful list of files/librairies",
   "main": "index.js",
   "scripts": {
