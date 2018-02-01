@@ -140,7 +140,7 @@ function unique(arr) {
 function chunk(array, count) {
   const arr = []
 
-  for (let i = 0, ilen = array.length; i < ilen; i += count) {
+  for (var i = 0, ilen = array.length; i < ilen; i += count) {
     arr.push( array.slice(i, i+count) )
   }
 
