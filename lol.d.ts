@@ -128,7 +128,7 @@ declare module 'lol/utils/function' {
    * @param {Function} fn
    * @param {object} ctx
    */
-  export function scope(fn: Function, ctx:object) : void;
+  export function scope(fn: Function, ctx:object) : Function;
 
 }
 
@@ -293,6 +293,14 @@ declare module 'lol/utils/string' {
   export function toUnderscore(str:string) : string;
 
   export function toCapitalize(str:string) : string;
+
+}
+
+declare module 'lol/utils/guid' {
+
+  export function s4() : string;
+
+  export function guid() : string;
 
 }
 
