@@ -115,10 +115,10 @@ declare module 'lol/utils/function' {
    * Bind a list of key methods to the context
    *
    * @export
-   * @param {(string|string[])} key
    * @param {object} ctx
+   * @param {...string} methods
    */
-  export function bind(key:string|string[], ctx:object) : void;
+  export function bind(ctx:any, methods:...string) : void;
 
   /**
    *

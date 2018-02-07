@@ -12,14 +12,16 @@ function scope( fn, ctx ) {
 
 /**
  * Bind a list of key methods to the context
- * @param {string[]} key
  * @param {any} ctx
+ * @param {...string} methods
  */
-function bind( key, ctx ) {
-  var keys = Array.isArray(key) ? key : [ key ]
-  keys.forEach(function(k) {
-    ctx[k] = ctx[k].bind(ctx)
-  })
+function bind() {
+  var methods = Array.prototype.slice.apply(arguments);
+  var context = methods.shift();
+
+  methods.forEach(function(str) {
+    context[str] = context[str].bind(context);
+  });
 }
 
 module.exports = {
