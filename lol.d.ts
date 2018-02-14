@@ -118,7 +118,7 @@ declare module 'lol/utils/function' {
    * @param {object} ctx
    * @param {...string} methods
    */
-  export function bind(ctx:any, methods:...string) : void;
+  export function bind(ctx:any, ...methods:string[]) : void;
 
   /**
    *
