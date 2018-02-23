@@ -181,5 +181,5 @@ module.exports = {
   toSlug: toSlug,
   toCamelCase: toCamelCase,
   toUnderscore: toUnderscore,
-  toCapitaliz: toCapitalize
+  toCapitalize: toCapitalize
 }
