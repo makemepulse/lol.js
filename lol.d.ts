@@ -1,6 +1,6 @@
-declare module 'lol/raf' {
+declare module 'lol/raf/raf' {
 
-  export class RAF {
+  export default class RAF {
 
     /**
      * Register a new subscriber
