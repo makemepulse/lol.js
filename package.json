@@ -1,8 +1,7 @@
 {
   "name": "lol",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "Useful list of files/librairies",
-  "main": "index.js",
   "typings": "lol.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
