@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Useful list of files/librairies",
   "typings": "lol.d.ts",
   "scripts": {
