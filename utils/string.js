@@ -73,7 +73,7 @@ function pad(str, limit, char, insertAfter) {
         if (insertAfter)
             s = s + char;
         else
-            s = s + char;
+            s = char + s;
         return pad(s, limit, char, insertAfter);
     }
     return s;

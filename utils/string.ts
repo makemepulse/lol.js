@@ -89,7 +89,7 @@ export function pad(str: string, limit: number = 2, char: string = "0", insertAf
 
   if (s.length < limit) {
     if (insertAfter) s = s + char
-    else s = s + char
+    else s = char + s
 
     return pad(s, limit, char, insertAfter)
   }
