@@ -4,7 +4,8 @@
   "description": "Useful list of files/librairies",
   "typings": "lol.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/makemepulse/lol.js/issues"
   },
-  "homepage": "https://github.com/makemepulse/lol.js#readme"
+  "homepage": "https://github.com/makemepulse/lol.js#readme",
+  "dependencies": {
+    "typescript": "^3.4.1"
+  }
 }

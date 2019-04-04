@@ -1,30 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Scope a function inside another one. Prevent binding.
- *
- * @param {Object} obj
- * @param {Function} fn
+ * Scope a function inside another one. Prevent from binding.
  */
-function scope( fn, ctx ) {
-  return function $scope(){
-    return fn.apply(ctx, arguments)
-  }
+function scope(fn, context) {
+    if (context === void 0) { context = null; }
+    return function $scope() {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        return fn.apply(context, args);
+    };
 }
-
+exports.scope = scope;
 /**
- * Bind a list of key methods to the context
- * @param {any} ctx
- * @param {...string} methods
+ * Bind a list methods to the context
  */
-function bind() {
-  var methods = Array.prototype.slice.apply(arguments);
-  var context = methods.shift();
-
-  methods.forEach(function(str) {
-    context[str] = context[str].bind(context);
-  });
+function bind(context) {
+    var methods = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        methods[_i - 1] = arguments[_i];
+    }
+    methods.forEach(function (str) {
+        context[str] = context[str].bind(context);
+    });
 }
-
-module.exports = {
-  scope: scope,
-  bind:  bind
-}
+exports.bind = bind;

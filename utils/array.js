@@ -1,157 +1,136 @@
-'use strict'
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Shuffle an array
- *
- * @param {Array} arr
- *
- * @returns {Array}
- *
  */
 function shuffle(arr) {
-  var length = arr.length
-  var tmp, rand
-
-  while (length != 0) {
-    rand = Math.floor(Math.random() * length)
-    length--
-    tmp         = arr[length]
-    arr[length] = arr[rand]
-    arr[rand]   = tmp
-  }
-
-  return arr
+    var length = arr.length;
+    var tmp, rand;
+    while (length != 0) {
+        rand = Math.floor(Math.random() * length);
+        length--;
+        tmp = arr[length];
+        arr[length] = arr[rand];
+        arr[rand] = tmp;
+    }
+    return arr;
 }
-
-
+exports.shuffle = shuffle;
 /**
- * Sort array
- *
- * @param {Array} arr - Array to sort
- *
- * @returns {Array} Sorted array
- *
+ * Sort an array
  */
 function sort(arr) {
-  var tmp       = []
-  var currIndex = -1
-  var tm        = -1
-
-  for (var i = 0, ilen = arr.length; i < ilen; i++) {
-
-    currIndex = tmp.length
-    tmp[currIndex] = arr[i]
-
-    for (var j = 0, jlen = tmp.length; j < jlen; j++) {
-      if (tmp[currIndex] < tmp[j]) {
-        tm             = tmp[j]
-        tmp[j]         = tmp[currIndex]
-        tmp[currIndex] = tm
-      }
+    var currIndex = -1;
+    var tmp = [];
+    var tm;
+    for (var i = 0, ilen = arr.length; i < ilen; i++) {
+        currIndex = tmp.length;
+        tmp[currIndex] = arr[i];
+        for (var j = 0, jlen = tmp.length; j < jlen; j++) {
+            if (tmp[currIndex] < tmp[j]) {
+                tm = tmp[j];
+                tmp[j] = tmp[currIndex];
+                tmp[currIndex] = tm;
+            }
+        }
     }
-
-  }
-
-  return tmp
+    return tmp;
 }
-
+exports.sort = sort;
 /**
  * Sort array relative to object key
- *
- * @param {Array} arr - Array to sort
- * @param {String} key - Object key
- *
- * @returns {Array} Sorted array
- *
  */
-function sortObjects(arr, key) {
-  var tmp       = []
-  var currIndex = -1
-  var tm        = -1
-
-  for (var i = 0, ilen = arr.length; i < ilen; i++) {
-
-    currIndex = tmp.length
-    tmp[currIndex] = arr[i]
-
-    for (var j = 0, jlen = tmp.length; j < jlen; j++) {
-      if (tmp[currIndex][key] < tmp[j][key]) {
-        tm             = tmp[j]
-        tmp[j]         = tmp[currIndex]
-        tmp[currIndex] = tm
-      }
+function sortByKey(arr, key) {
+    var currIndex = -1;
+    var tmp = [];
+    var tm;
+    for (var i = 0, ilen = arr.length; i < ilen; i++) {
+        currIndex = tmp.length;
+        tmp[currIndex] = arr[i];
+        for (var j = 0, jlen = tmp.length; j < jlen; j++) {
+            if (tmp[currIndex][key] < tmp[j][key]) {
+                tm = tmp[j];
+                tmp[j] = tmp[currIndex];
+                tmp[currIndex] = tm;
+            }
+        }
     }
-
-  }
-
-  return tmp
+    return tmp;
 }
-
+exports.sortByKey = sortByKey;
 /**
  * Inverse array
- *
- * @param {Array} arr
- *
- * @returns {Array}
- *
  */
 function inverse(arr) {
-  var tmp = []
-
-  for(var ilen = arr.length-1, i = ilen; i >= 0; i--) {
-    tmp.push(arr[i])
-  }
-
-  return tmp
+    var tmp = [];
+    for (var ilen = arr.length - 1, i = ilen; i >= 0; i--) {
+        tmp.push(arr[i]);
+    }
+    return tmp;
 }
-
-
+exports.inverse = inverse;
 /**
  * Remove duplicates
- *
- * @param {Array} arr
- *
- * @returns {Array}
- *
  */
 function unique(arr) {
-
-  var tmp = []
-
-  for (var i = 0, ilen = arr.length; i < ilen; i++) {
-    if (tmp.indexOf(arr[i]) === -1) {
-      tmp.push(arr[i])
+    var tmp = [];
+    for (var i = 0, ilen = arr.length; i < ilen; i++) {
+        if (tmp.indexOf(arr[i]) === -1) {
+            tmp.push(arr[i]);
+        }
     }
-  }
-
-  return tmp
-
+    return tmp;
 }
-
-'use strict'
-
+exports.unique = unique;
 /**
  * Split array into chunks
- *
- * @param {Array} array
- * @param {Number} count
- * @returns {Array}
  */
 function chunk(array, count) {
-  const arr = []
-
-  for (var i = 0, ilen = array.length; i < ilen; i += count) {
-    arr.push( array.slice(i, i+count) )
-  }
-
-  return arr
+    var arr = [];
+    for (var i = 0, ilen = array.length; i < ilen; i += count) {
+        arr.push(array.slice(i, i + count));
+    }
+    return arr;
 }
-
-module.exports = {
-  shuffle: shuffle,
-  sort: sort,
-  sortObjects: sortObjects,
-  inverse: inverse,
-  unique: unique,
-  chunk: chunk
+exports.chunk = chunk;
+/**
+ * Generate an array
+ */
+function generate(callback) {
+    var arr = [];
+    var i = 0;
+    var running = true;
+    var previous;
+    function stop_running() { running = false; }
+    while (running) {
+        previous = callback(i, stop_running, previous);
+        arr.push(previous);
+        i++;
+    }
+    return arr;
 }
+exports.generate = generate;
+/**
+ * Generate enumeration
+ */
+function generateEnumeration(count) {
+    if (count === void 0) { count = 10; }
+    return generate(function (index, stop_running, previous) {
+        if (index + 1 == count)
+            stop_running();
+        return index;
+    });
+}
+exports.generateEnumeration = generateEnumeration;
+/**
+ * Generate random enumeration
+ */
+function generateRandomEnumeration(count) {
+    if (count === void 0) { count = 10; }
+    return generate(function (index, stop_running, previous) {
+        if (index + 1 == count)
+            stop_running();
+        return Math.random();
+    });
+}
+exports.generateRandomEnumeration = generateRandomEnumeration;
