@@ -34,15 +34,14 @@ export function toRadian(degree: number) {
 /**
  * Set float precision
  */
-export function precision(value: number, precision: number) {
-  return Math.floor(value * Math.pow(10, precision)) / Math.pow(10, precision)
+export function toPrecision(value: number, precision: number) {
+  const p = Math.pow(10, precision)
+  return Math.floor(value * p) / p
 }
 
 /**
  * Map value
  */
 export function map(value: number, min0: number, max0: number, min1: number, max1: number) {
-  const l0 = max0 - min0
-  const l1 = max1 - min1
-  return min1 + ((value - min0) / l0) * l1
+  return min1 + ((value - min0) / (max0 - min0)) * (max1 - min1)
 }

@@ -36,16 +36,15 @@ exports.toRadian = toRadian;
 /**
  * Set float precision
  */
-function precision(value, precision) {
-    return Math.floor(value * Math.pow(10, precision)) / Math.pow(10, precision);
+function toPrecision(value, precision) {
+    var p = Math.pow(10, precision);
+    return Math.floor(value * p) / p;
 }
-exports.precision = precision;
+exports.toPrecision = toPrecision;
 /**
  * Map value
  */
 function map(value, min0, max0, min1, max1) {
-    var l0 = max0 - min0;
-    var l1 = max1 - min1;
-    return min1 + ((value - min0) / l0) * l1;
+    return min1 + ((value - min0) / (max0 - min0)) * (max1 - min1);
 }
 exports.map = map;
