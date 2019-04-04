@@ -17,13 +17,13 @@ interface Template2Options {
 /**
  * Interpolate string with the object
  */
-export function template( string: string, obj: any, regex: (key: string) => RegExp ) {
+export function template( string: string, obj: any, regex: (key: string) => RegExp = _TEMPLATE_REGEX ) {
   obj = obj || {}
   let value: any, str = string
 
   for (let key in obj) {
     value = obj[key]
-    str   = str.replace( regex ? regex(key) : _TEMPLATE_REGEX(key), value )
+    str   = str.replace( regex(key), value )
   }
 
   return str

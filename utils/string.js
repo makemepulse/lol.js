@@ -11,11 +11,12 @@ var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g');
  * Interpolate string with the object
  */
 function template(string, obj, regex) {
+    if (regex === void 0) { regex = _TEMPLATE_REGEX; }
     obj = obj || {};
     var value, str = string;
     for (var key in obj) {
         value = obj[key];
-        str = str.replace(regex ? regex(key) : _TEMPLATE_REGEX(key), value);
+        str = str.replace(regex(key), value);
     }
     return str;
 }
