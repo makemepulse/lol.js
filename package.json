@@ -1,8 +1,8 @@
 {
   "name": "lol",
-  "version": "0.0.12",
+  "version": "1.0.0",
   "description": "Useful list of files/librairies",
-  "typings": "lol.d.ts",
+  "types": "lol.d.ts",
   "scripts": {
     "tsc": "tsc",
     "watch": "tsc --watch"
@@ -11,13 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/makemepulse/lol.js.git"
   },
-  "author": "",
+  "author": "MakeMePulse",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/makemepulse/lol.js/issues"
   },
   "homepage": "https://github.com/makemepulse/lol.js#readme",
-  "dependencies": {
-    "typescript": "^3.4.1"
+  "devDependencies": {
+    "typescript": "3.4.1"
   }
 }
