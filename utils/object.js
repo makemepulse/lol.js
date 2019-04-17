@@ -122,3 +122,22 @@ function immutable(obj) {
     return Object.isFrozen(obj) ? obj : Object.freeze(obj);
 }
 exports.immutable = immutable;
+function clone(obj) {
+    var cloneObj = {};
+    for (var key in obj) {
+        // Clone ray
+        if (Array.isArray(obj[key])) {
+            cloneObj[key] = obj[key].slice(0);
+        }
+        // Clone object
+        else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            cloneObj[key] = clone(obj[key]);
+        }
+        // Copy Number / String / Boolean
+        else {
+            cloneObj[key] = obj[key];
+        }
+    }
+    return cloneObj;
+}
+exports.clone = clone;

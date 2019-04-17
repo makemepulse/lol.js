@@ -130,3 +130,28 @@ export function immutable(obj: any) {
 
   return Object.isFrozen(obj) ? obj : Object.freeze(obj)
 }
+
+export function clone(obj: any) {
+ var cloneObj: any = {}
+
+ for (var key in obj) {
+
+   // Clone ray
+   if (Array.isArray(obj[key])) {
+     cloneObj[key] = obj[key].slice(0)
+   }
+
+   // Clone object
+   else if (typeof obj[key] === 'object' && obj[key] !== null) {
+     cloneObj[key] = clone(obj[key])
+   }
+
+   // Copy Number / String / Boolean
+   else {
+     cloneObj[key] = obj[key]
+   }
+
+ }
+
+ return cloneObj
+}
