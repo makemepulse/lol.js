@@ -14,11 +14,16 @@ interface Template2Options {
   body: string
 }
 
+const Template2DefaultOptions: Template2Options = {
+  open: '${',
+  body: '[a-z@$#-_?!]+',
+  close: '}'
+}
+
 /**
  * Interpolate string with the object
  */
-export function template( string: string, obj: any, regex: (key: string) => RegExp = _TEMPLATE_REGEX ) {
-  obj = obj || {}
+export function template( string: string, obj: any = {}, regex: (key: string) => RegExp = _TEMPLATE_REGEX ) {
   let value: any, str = string
 
   for (let key in obj) {
@@ -32,14 +37,13 @@ export function template( string: string, obj: any, regex: (key: string) => RegE
 /**
  * Interpolate string with the object
  */
-export function template2( string: string, obj: any, options: Template2Options ) {
-
-  obj = obj || {}
+export function template2( string: string, obj: any = {}, options: Template2Options = Template2DefaultOptions ) {
   options = Object.assign({
     open: '${',
     body: '[a-z@$#-_?!]+',
     close: '}'
-  }, options || {})
+  }, options)
+
   var value: any, str = string
 
   var matches  = str.match(new RegExp(
@@ -70,7 +74,6 @@ export function template2( string: string, obj: any, options: Template2Options )
   })
 
   return str
-
 }
 
 /**
@@ -142,6 +145,13 @@ export function toCapitalize(str: string) {
     return s[0].toUpperCase() + s.slice(1).toLowerCase()
   })
   return strs.join(' ')
+}
+
+/**
+ * Capitalize first letter
+ */
+export function toUCFirst(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 /**

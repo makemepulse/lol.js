@@ -7,12 +7,17 @@ function _TEMPLATE_ESCAPE_REGEX(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
 var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g');
+var Template2DefaultOptions = {
+    open: '${',
+    body: '[a-z@$#-_?!]+',
+    close: '}'
+};
 /**
  * Interpolate string with the object
  */
 function template(string, obj, regex) {
+    if (obj === void 0) { obj = {}; }
     if (regex === void 0) { regex = _TEMPLATE_REGEX; }
-    obj = obj || {};
     var value, str = string;
     for (var key in obj) {
         value = obj[key];
@@ -25,12 +30,13 @@ exports.template = template;
  * Interpolate string with the object
  */
 function template2(string, obj, options) {
-    obj = obj || {};
+    if (obj === void 0) { obj = {}; }
+    if (options === void 0) { options = Template2DefaultOptions; }
     options = Object.assign({
         open: '${',
         body: '[a-z@$#-_?!]+',
         close: '}'
-    }, options || {});
+    }, options);
     var value, str = string;
     var matches = str.match(new RegExp(_TEMPLATE_ESCAPE_REGEX(options.open) +
         options.body +
@@ -120,6 +126,13 @@ function toCapitalize(str) {
     return strs.join(' ');
 }
 exports.toCapitalize = toCapitalize;
+/**
+ * Capitalize first letter
+ */
+function toUCFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+exports.toUCFirst = toUCFirst;
 /**
  * Generate version from datetime
  */
