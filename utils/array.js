@@ -134,3 +134,32 @@ function generateRandomEnumeration(count) {
     });
 }
 exports.generateRandomEnumeration = generateRandomEnumeration;
+/**
+ * Find similar elements between two arrays
+ */
+function similarity(arr0, arr1) {
+    var arr = [];
+    for (var i = 0; i < arr0.length; i++) {
+        var el0 = arr0[i];
+        for (var j = 0; j < arr1.length; j++) {
+            var el1 = arr1[j];
+            if (el0 == el1)
+                arr.push(el0);
+        }
+    }
+    return arr;
+}
+exports.similarity = similarity;
+/**
+ * Find different elements between two arrays
+ */
+function difference(arr0, arr1) {
+    var arr = [];
+    for (var i = 0; i < arr0.length; i++) {
+        var el0 = arr0[i];
+        if (arr1.indexOf(el0) == -1)
+            arr.push(el0);
+    }
+    return arr;
+}
+exports.difference = difference;

@@ -1,3 +1,5 @@
+import { clone } from "./object";
+
 /**
  * Shuffle an array
  */
@@ -149,4 +151,35 @@ export function generateRandomEnumeration(count: number = 10) {
     if (index+1 == count) stop_running()
     return Math.random()
   })
+}
+
+/**
+ * Find similar elements between two arrays
+ */
+export function similarity<T>(arr0: T[], arr1: T[]) {
+  const arr: T[] = []
+
+  for (let i = 0; i < arr0.length; i++) {
+    const el0 = arr0[i];
+    for (let j = 0; j < arr1.length; j++) {
+      const el1 = arr1[j];
+      if (el0 == el1) arr.push(el0)
+    }
+  }
+
+  return arr
+}
+
+/**
+ * Find different elements between two arrays
+ */
+export function difference<T>(arr0: T[], arr1: T[]) {
+  const arr: T[] = []
+
+  for (let i = 0; i < arr0.length; i++) {
+    const el0 = arr0[i];
+    if (arr1.indexOf(el0) == -1) arr.push( el0 )
+  }
+
+  return arr
 }
